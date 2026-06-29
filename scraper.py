@@ -33,18 +33,6 @@ TASKS = [
             "https://perfumeaddiction.com/collections/swiss-arabian"
         ],
         "currency": "₹"
-    },
-    {
-        "name": "Intertec Under 100 QAR",
-        "type": "budget",
-        "max_price": 100.0,
-        "urls": [
-            # Added pages 1, 2, and 3 to capture more of their catalog
-            "https://shopintertec.com/collections/all",
-            "https://shopintertec.com/collections/all?page=2",
-            "https://shopintertec.com/collections/all?page=3"
-        ],
-        "currency": "QAR "
     }
 ]
 
@@ -53,7 +41,6 @@ def clean_text(text):
     return re.sub(r'\s+', ' ', text).strip()
 
 def clean_title(title_clean):
-    # Added QAR to the stripping regex
     title_clean = re.sub(r'(?:Rs\.?|₹|INR|QAR)\s*[\d,]+(?:\.\d{2})?', '', title_clean, flags=re.I)
     title_clean = re.sub(r'\b(?:from|sale|sold\s*out|in\s*stock|regular\s*price|sale\s*price|unit\s*price\s*/\s*per)\b', '', title_clean, flags=re.I)
     title_clean = title_clean.replace("Swiss ArabianSwiss Arabian", "Swiss Arabian")
@@ -89,7 +76,6 @@ def extract_best_title(candidate_titles, handle):
     return best_title
 
 def extract_prices(text):
-    # Upgraded regex to catch QAR and perfectly handle numbers under 100
     matches = re.findall(r'(?:Rs\.?|₹|INR|QAR)\s*([\d,]+(?:\.\d{2})?)', text, re.I)
     prices = []
     for m in matches:
