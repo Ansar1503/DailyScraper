@@ -1,2 +1,8 @@
+# Virtual environment
 .venv/
+venv/
+ENV/
+
+# Scraper output data files
 daily_offers.xlsx
+intertec_budget_deals.xlsx
