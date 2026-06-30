@@ -1,6 +1,8 @@
 name: Daily Offer Scraper
 
-on:  [push]
+on:  
+  schedule:
+    - cron: '30 17 * * *'
 
 jobs:  
   run-scraper:    
