@@ -1,10 +1,6 @@
 name: Daily Offer Scraper
 
-on:  
-  schedule:    
-    # Triggers around 12:15 PM - 12:30 PM IST (6:45 AM UTC) to account for daily GitHub queue delays
-    - cron: '30 10 * * *'  
-  workflow_dispatch: 
+on:  [push]
 
 jobs:  
   run-scraper:    
