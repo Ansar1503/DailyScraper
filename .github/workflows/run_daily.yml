@@ -1,38 +1,37 @@
 name: Daily Offer Scraper
 
-on:
-  schedule:
-    # This triggers the script every single day at 7:00 AM UTC (12:30 PM IST)
-    - cron: '0 7 * * *'
-  workflow_dispatch: # Allows you to also trigger it manually with a single click
+on:  
+  schedule:    
+    # This triggers the script at 6:45 AM UTC to account for GitHub delays 
+    - cron: '45 6 * * *'  
+  workflow_dispatch: 
 
-jobs:
-  run-scraper:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+jobs:  
+  run-scraper:    
+    runs-on: ubuntu-latest    
+    permissions:      
+      contents: write    
+    steps:    
+      - name: Checkout repository code      
+        uses: actions/checkout@v4    
 
-    steps:
-    - name: Checkout repository code
-      uses: actions/checkout@v4
+      - name: Set up Python Environment      
+        uses: actions/setup-python@v5      
+        with:        
+          python-version: '3.10'    
 
-    - name: Set up Python Environment
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Install Libraries      
+        run: |        
+          python -m pip install --upgrade pip        
+          pip install -r requirement.txt    
 
-    - name: Install Libraries
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirement.txt
+      - name: Run Scraper Script      
+        run: python scraper.py    
 
-    - name: Run Scraper Script
-      run: python scraper.py
-
-    - name: Commit and Save the Excel Report back to GitHub
-      run: |
-        git config --global user.name "GitHub Action Scraper"
-        git config --global user.email "actions@github.com"
-        git add daily_offers.xlsx
-        git commit -m "Automated Report Update: $(date +'%Y-%m-%d')" || exit 0
-        git push origin HEAD:${{ github.ref_name }}
+      - name: Commit and Save the Excel Report back to GitHub      
+        run: |        
+          git config --global user.name "GitHub Action Scraper"        
+          git config --global user.email "actions@github.com"        
+          git add daily_offers.xlsx        
+          git commit -m "Automated Report Update: $(date +'%Y-%m-%d')" || exit 0        
+          git push origin HEAD:${{ github.ref_name }}
