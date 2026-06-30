@@ -2,7 +2,7 @@ name: Daily Offer Scraper
 
 on:  
   schedule:    
-    - cron: '20 18 * * *'
+    - cron: "*/5 * * * *" 
 
 jobs:  
   run-scraper:    
