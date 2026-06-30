@@ -1,8 +1,9 @@
 name: Daily Offer Scraper
 
-on:
-  schedule:
-    - cron: '35 9 * * *'
+on:  
+  schedule:    
+    # Testing trigger for 3:05 PM IST (9:35 AM UTC)
+    - cron: '35 9 * * *'  
   workflow_dispatch: 
 
 jobs:  
