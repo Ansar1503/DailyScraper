@@ -1,9 +1,8 @@
 name: Daily Offer Scraper
 
-on:  
-  schedule:    
-    # This triggers the script at 6:45 AM UTC to account for GitHub delays 
-    - cron: '45 6 * * *'  
+on:
+  schedule:
+    - cron: '35 9 * * *'
   workflow_dispatch: 
 
 jobs:  
