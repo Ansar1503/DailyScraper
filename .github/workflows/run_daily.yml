@@ -1,8 +1,10 @@
 name: Daily Offer Scraper
 
 on:  
-  schedule:
-    - cron: '30 17 * * *'
+  push:             
+  workflow_dispatch:
+  schedule:    
+    - cron: '20 12 * * *' 
 
 jobs:  
   run-scraper:    
@@ -11,10 +13,10 @@ jobs:
       contents: write    
     steps:    
       - name: Checkout repository code      
-        uses: actions/checkout@v6    # Updated from @v4
+        uses: actions/checkout@v6    
 
       - name: Set up Python Environment      
-        uses: actions/setup-python@v6 # Updated from @v5   
+        uses: actions/setup-python@v6  
         with:        
           python-version: '3.10'    
 
